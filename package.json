@@ -1,7 +1,7 @@
 {
   "name": "v-g2",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A vue wrapper for antv-g2",
   "main": "dist/v-g2.ssr.js",
   "module": "dist/v-g2.esm.js",
   "unpkg": "dist/v-g2.min.js",
@@ -10,6 +10,7 @@
     "src/**/*.vue"
   ],
   "scripts": {
+    "dev": "vue serve ./src/App.vu",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
