@@ -1,6 +1,11 @@
 {
   "name": "v-g2",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "keywords": [
+    "vue",
+    "g2",
+    "antv"
+  ],
   "description": "A vue wrapper for antv-g2",
   "main": "dist/v-g2.ssr.js",
   "module": "dist/v-g2.esm.js",
@@ -38,5 +43,11 @@
   },
   "engines": {
     "node": ">=8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LancelotLewis/v-g2"
+  },
+  "homepage": "https://lancelotlewis.github.io/v-g2/",
+  "license": "MIT"
 }
