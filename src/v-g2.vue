@@ -2,7 +2,7 @@
  * @Author: lancelot lewis
  * @Date: 2019-12-17 15:32:35
  * @Description:
- * @LastEditTime: 2019-12-17 16:00:17
+ * @LastEditTime: 2020-03-03 10:30:58
  * @LastEditors: lancelot lewis
  -->
 <template>
@@ -10,76 +10,72 @@
 </template>
 
 <script>
-import throttle from 'lodash.throttle';
-import cloneDeep from 'lodash.clonedeep';
-import G2 from '@antv/g2';
-import ResizeObserver from 'resize-observer-polyfill';
+import { Chart } from '@antv/g2';
 
 export default {
   props: {
-    chartOpt: {
+    options: {
       type: Object,
       default() {
         return {};
       },
     },
-    viewOpt: {
-      type: Array,
-      default() {
-        return [];
-      },
-    },
+    beforeRender: Function,
+    afterRender: Function,
   },
   mounted() {
-    this.ro = new ResizeObserver(this.resize);
-    this.ro.observe(this.$el);
     this.drawChart();
   },
   beforeDestroy() {
-    this.ro.unobserve(this.$el);
-    this.ro.disconnect();
-    this.chart.destroy();
+    this.destroyChart();
   },
   methods: {
-    resize: throttle(
-      function() {
-        const height = this.$el.clientHeight;
-        this.chart.changeHeight(height);
-      },
-      500,
-      {
-        leading: false,
-        trailing: true,
-      },
-    ),
-    drawChart() {
-      this.chart && this.chart.destroy();
-      const chart = new G2.Chart(
-        Object.assign(
-          {
-            container: this.$el,
-            forceFit: true,
-            height: this.$el.clientHeight,
-            // renderer: 'svg',
+    destroyChart() {
+      this.chart.destroy();
+    },
+    async drawChart() {
+      this.chart && this.destroyChart();
+      const { title } = this.options;
+      const opt = {
+        container: this.$el,
+        autoFit: true,
+        padding: [50, 20, 50, 20],
+        // renderer: 'svg',
+        ...this.options,
+        title: undefined,
+      };
+      if (title) {
+        const titleOpt = {
+          type: 'text',
+          position: ['50%', '0%'],
+          content: title,
+          offsetY: -30,
+          style: {
+            textAlign: 'center',
+            fontSize: 18,
           },
-          this.chartOpt,
-        ),
-      );
-      this.viewOpt.forEach(view => {
-        chart.view(cloneDeep(view));
-      });
+        };
+        opt.options.annotations = opt.options.annotations
+          ? [titleOpt, ...opt.options.annotations]
+          : [titleOpt];
+      }
+      const chart = new Chart(opt);
+      if (this.beforeRender instanceof Function) {
+        await this.beforeRender(chart);
+      }
+      // chart.on('beforerender', () => {
+      // });
+      // chart.on('afterrender', () => {
+      // });
       chart.render();
+      if (this.afterRender instanceof Function) {
+        await this.afterRender(chart);
+      }
       this.chart = chart;
     },
   },
   watch: {
-    chartOpt: {
-      deep: true,
-      handler() {
-        this.drawChart();
-      },
-    },
-    viewOpt: {
+    options: {
       deep: true,
       handler() {
         this.drawChart();
@@ -93,9 +89,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.antv-g2 {
-  height: 100%;
-}
-</style>

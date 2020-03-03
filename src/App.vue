@@ -2,15 +2,16 @@
  * @Author: lancelot lewis
  * @Date: 2019-12-17 15:45:40
  * @Description:
- * @LastEditTime: 2019-12-17 16:39:44
+ * @LastEditTime: 2020-03-03 10:30:48
  * @LastEditors: lancelot lewis
  -->
 <template>
-  <v-g2 style="height:500px" :chartOpt="chartOpt"></v-g2>
+  <v-g2 ref="v-g2" class="chart" :options="chartOpt"></v-g2>
 </template>
 
 <script>
-import VG2 from '../dist/v-g2.esm';
+// import VG2 from '../dist/v-g2.esm';
+import VG2 from './v-g2';
 
 const data = [
   { type: '未知', value: 654, percent: 0.02 },
@@ -26,20 +27,33 @@ export default {
   components: {
     VG2,
   },
+  mounted() {
+    // const chart = this.$refs['v-g2'].chart;
+    // setTimeout(() => {
+    //   chart.updateOptions({
+    //     data,
+    //     scales: {
+    //       value: {
+    //         alias: '销售额(--万--)',
+    //       },
+    //     },
+    //   });
+    //   chart.render();
+    // }, 3000);
+  },
   data() {
     return {
       chartOpt: {
-        data,
-        height: 500,
-        padding: [20, 20, 50, 20],
+        title: '这是标题这是标题这是标题这是标题',
         options: {
+          data,
           scales: {
             value: {
-              alias: '销售额(万)',
+              alias: '销售额(--万)',
             },
           },
           axes: {
-            value: false,
+            // value: {},
             type: {
               label: {
                 textStyle: {
@@ -52,42 +66,43 @@ export default {
               },
             },
           },
-          guides: [
-            {
-              type: 'dataMarker',
-              top: true,
-              content: '因政策调整导致销量下滑',
-              position: ['2014-01', 1750],
-              style: {
-                text: {
-                  fontSize: 13,
-                },
-              },
-              lineLength: 30,
-            },
-          ],
-          geoms: [
+          // guides: [
+          //   {
+          //     type: 'dataMarker',
+          //     top: true,
+          //     content: '因政策调整导致销量下滑',
+          //     position: ['2014-01', 1750],
+          //     style: {
+          //       text: {
+          //         fontSize: 13,
+          //       },
+          //     },
+          //     lineLength: 30,
+          //   },
+          // ],
+          geometries: [
             {
               type: 'interval',
               position: 'type*value',
-              opacity: 1,
-              label: {
-                field: 'value',
-                cfg: {
-                  useHtml: true,
-                  htmlTemplate: (text, item) => {
-                    const a = item.point;
-                    const percent = String(parseInt(a.percent * 100)) + '%';
-                    return (
-                      '<span class="g2-label-item"><p class="g2-label-item-value">' +
-                      a.value +
-                      '</p><p class="g2-label-item-percent">' +
-                      percent +
-                      '</p></div>'
-                    );
-                  },
-                },
-              },
+              color: 'type',
+              // opacity: 1,
+              // label: {
+              //   field: 'value',
+              //   cfg: {
+              //     useHtml: true,
+              //     htmlTemplate: (text, item) => {
+              //       const a = item.point;
+              //       const percent = String(parseInt(a.percent * 100)) + '%';
+              //       return (
+              //         '<span class="g2-label-item"><p class="g2-label-item-value">' +
+              //         a.value +
+              //         '</p><p class="g2-label-item-percent">' +
+              //         percent +
+              //         '</p></div>'
+              //       );
+              //     },
+              //   },
+              // },
             },
           ],
         },
@@ -98,15 +113,21 @@ export default {
 </script>
 
 <style>
-.g2-label-item {
-  font-size: 12px;
-  text-align: center;
-  line-height: 0.4;
+* {
+  padding: 0;
+  margin: 0;
 }
-.g2-label-item-value {
-  color: #595959;
+html,
+body {
+  height: 100vh;
 }
-.g2-label-item-percent {
-  color: #8c8c8c;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chart {
+  width: 90vw;
+  height: 90vh;
 }
 </style>
