@@ -2,7 +2,7 @@
  * @Author: lancelot lewis
  * @Date: 2019-12-17 15:32:35
  * @Description:
- * @LastEditTime: 2020-03-03 11:26:13
+ * @LastEditTime: 2020-03-03 14:23:19
  * @LastEditors: lancelot lewis
  -->
 <template>
@@ -11,9 +11,10 @@
 
 <script>
 import { Chart } from '@antv/g2';
-import cloneDeep from 'lodash.clonedeep';
+import { cloneDeep } from 'lodash-es';
 
 export default {
+  name: 'VG2',
   props: {
     options: {
       type: Object,
@@ -61,13 +62,20 @@ export default {
           : [titleOpt];
       }
       const chart = new Chart(opt);
+      // chart.on('beforerender', () => {
+      //   if (this.beforeRender instanceof Function) {
+      //     this.beforeRender(chart);
+      //   }
+      // });
+      // chart.on('afterrender', () => {
+      //   if (this.afterRender instanceof Function) {
+      //     this.afterRender(chart);
+      //   }
+      // });
+
       if (this.beforeRender instanceof Function) {
         await this.beforeRender(chart);
       }
-      // chart.on('beforerender', () => {
-      // });
-      // chart.on('afterrender', () => {
-      // });
       chart.render();
       if (this.afterRender instanceof Function) {
         await this.afterRender(chart);
