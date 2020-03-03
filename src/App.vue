@@ -2,11 +2,11 @@
  * @Author: lancelot lewis
  * @Date: 2019-12-17 15:45:40
  * @Description:
- * @LastEditTime: 2020-03-03 10:30:48
+ * @LastEditTime: 2020-03-03 11:27:12
  * @LastEditors: lancelot lewis
  -->
 <template>
-  <v-g2 ref="v-g2" class="chart" :options="chartOpt"></v-g2>
+  <v-g2 ref="v-g2" class="chart" :options="options"></v-g2>
 </template>
 
 <script>
@@ -27,82 +27,56 @@ export default {
   components: {
     VG2,
   },
-  mounted() {
-    // const chart = this.$refs['v-g2'].chart;
-    // setTimeout(() => {
-    //   chart.updateOptions({
-    //     data,
-    //     scales: {
-    //       value: {
-    //         alias: '销售额(--万--)',
-    //       },
-    //     },
-    //   });
-    //   chart.render();
-    // }, 3000);
-  },
   data() {
     return {
-      chartOpt: {
-        title: '这是标题这是标题这是标题这是标题',
+      options: {
+        title: '不同年龄段销售额统计',
+        padding: [50, 20, 50, 50],
         options: {
           data,
           scales: {
             value: {
-              alias: '销售额(--万)',
+              alias: '销售额(万)',
             },
           },
           axes: {
-            // value: {},
+            // value: false,
             type: {
               label: {
-                textStyle: {
+                style: {
                   fill: '#aaaaaa',
                 },
               },
               tickLine: {
-                alignWithLabel: false,
+                alignTick: false,
                 length: 0,
               },
             },
           },
-          // guides: [
-          //   {
-          //     type: 'dataMarker',
-          //     top: true,
-          //     content: '因政策调整导致销量下滑',
-          //     position: ['2014-01', 1750],
-          //     style: {
-          //       text: {
-          //         fontSize: 13,
-          //       },
-          //     },
-          //     lineLength: 30,
-          //   },
-          // ],
+          annotations: [
+            {
+              type: 'dataMarker',
+              text: {
+                content: '因政策调整导致销量下滑',
+                style: {
+                  fontSize: 13,
+                },
+              },
+              position: ['40-49 岁', 3500],
+              // lineLength: 30,
+            },
+          ],
           geometries: [
             {
               type: 'interval',
               position: 'type*value',
+              style: {
+                opacity: 1,
+              },
               color: 'type',
-              // opacity: 1,
-              // label: {
-              //   field: 'value',
-              //   cfg: {
-              //     useHtml: true,
-              //     htmlTemplate: (text, item) => {
-              //       const a = item.point;
-              //       const percent = String(parseInt(a.percent * 100)) + '%';
-              //       return (
-              //         '<span class="g2-label-item"><p class="g2-label-item-value">' +
-              //         a.value +
-              //         '</p><p class="g2-label-item-percent">' +
-              //         percent +
-              //         '</p></div>'
-              //       );
-              //     },
-              //   },
-              // },
+              label: {
+                fields: ['value'],
+              },
             },
           ],
         },

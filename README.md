@@ -2,7 +2,7 @@
  * @Author: lancelot lewis
  * @Date: 2019-12-17 16:51:44
  * @Description:
- * @LastEditTime: 2019-12-17 17:24:15
+ * @LastEditTime: 2020-03-03 11:21:43
  * @LastEditors: lancelot lewis
  -->
 
@@ -35,30 +35,30 @@ Vue.component('v-g2', VG2);
 ```js
 require.config({
   paths: {
-    'vue': 'path/to/vue',
-    'g2': 'path/to/g2',
-    'v-g2': 'path/to/v-g2'
-  }
-})
+    vue: 'path/to/vue',
+    g2: 'path/to/g2',
+    'v-g2': 'path/to/v-g2',
+  },
+});
 
-require(['vue', 'v-g2'], function (Vue, VG2) {
+require(['vue', 'v-g2'], function(Vue, VG2) {
   // register component to use...
-  Vue.component('v-g2', VG2)
-})
+  Vue.component('v-g2', VG2);
+});
 ```
 
 ### Global variable
 
 ```js
 // register component to use
-Vue.component('v-g2', VG2)
+Vue.component('v-g2', VG2);
 ```
 
 ## Using the component
 
 ```vue
 <template>
-  <v-g2 style="height:500px" :chartOpt="chartOpt"></v-g2>
+  <v-g2 style="height:500px" :options="options"></v-g2>
 </template>
 
 <script>
@@ -80,65 +80,53 @@ export default {
   },
   data() {
     return {
-      chartOpt: {
-        data,
-        height: 500,
-        padding: [20, 20, 50, 20],
+      options: {
+        title: '不同年龄段销售额统计',
+        padding: [50, 20, 50, 50],
         options: {
+          data,
           scales: {
             value: {
               alias: '销售额(万)',
             },
           },
           axes: {
-            value: false,
+            // value: false,
             type: {
               label: {
-                textStyle: {
+                style: {
                   fill: '#aaaaaa',
                 },
               },
               tickLine: {
-                alignWithLabel: false,
+                alignTick: false,
                 length: 0,
               },
             },
           },
-          guides: [
+          annotations: [
             {
               type: 'dataMarker',
-              top: true,
-              content: '因政策调整导致销量下滑',
-              position: ['2014-01', 1750],
-              style: {
-                text: {
+              text: {
+                content: '因政策调整导致销量下滑',
+                style: {
                   fontSize: 13,
                 },
               },
-              lineLength: 30,
+              position: ['40-49 岁', 3500],
+              // lineLength: 30,
             },
           ],
-          geoms: [
+          geometries: [
             {
               type: 'interval',
               position: 'type*value',
-              opacity: 1,
+              style: {
+                opacity: 1,
+              },
+              color: 'type',
               label: {
-                field: 'value',
-                cfg: {
-                  useHtml: true,
-                  htmlTemplate: (text, item) => {
-                    const a = item.point;
-                    const percent = String(parseInt(a.percent * 100)) + '%';
-                    return (
-                      '<span class="g2-label-item"><p class="g2-label-item-value">' +
-                      a.value +
-                      '</p><p class="g2-label-item-percent">' +
-                      percent +
-                      '</p></div>'
-                    );
-                  },
-                },
+                fields: ['value'],
               },
             },
           ],

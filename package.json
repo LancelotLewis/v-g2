@@ -1,5 +1,6 @@
 {
-  "name": "@lancelotlewis/v-g2",
+  "name_": "@lancelotlewis/v-g2",
+  "name": "v-g2",
   "version": "1.1.0",
   "keywords": [
     "vue",
@@ -22,7 +23,8 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
   "dependencies": {
-    "@antv/g2": "^4.0.0"
+    "@antv/g2": "^4.0.0",
+    "lodash.clonedeep": "^4.5.0"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.0.1",
@@ -46,7 +48,8 @@
     "url": "https://github.com/LancelotLewis/v-g2"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry_": "https://npm.pkg.github.com",
+    "registry": "https://registry.npmjs.org"
   },
   "homepage": "https://lancelotlewis.github.io/v-g2/",
   "license": "MIT"

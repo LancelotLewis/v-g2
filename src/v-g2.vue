@@ -2,7 +2,7 @@
  * @Author: lancelot lewis
  * @Date: 2019-12-17 15:32:35
  * @Description:
- * @LastEditTime: 2020-03-03 10:30:58
+ * @LastEditTime: 2020-03-03 11:26:13
  * @LastEditors: lancelot lewis
  -->
 <template>
@@ -11,6 +11,7 @@
 
 <script>
 import { Chart } from '@antv/g2';
+import cloneDeep from 'lodash.clonedeep';
 
 export default {
   props: {
@@ -36,14 +37,14 @@ export default {
     async drawChart() {
       this.chart && this.destroyChart();
       const { title } = this.options;
-      const opt = {
+      const opt = cloneDeep({
         container: this.$el,
         autoFit: true,
         padding: [50, 20, 50, 20],
         // renderer: 'svg',
         ...this.options,
         title: undefined,
-      };
+      });
       if (title) {
         const titleOpt = {
           type: 'text',
