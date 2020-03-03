@@ -1,17 +1,17 @@
 {
   "name_": "@lancelotlewis/v-g2",
   "name": "v-g2",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "keywords": [
     "vue",
     "g2",
     "antv"
   ],
   "description": "A vue wrapper for antv-g2",
-  "main": "dist/v-g4.ssr.js",
-  "browser": "dist/v-g4.esm.js",
-  "module": "dist/v-g4.esm.js",
-  "unpkg": "dist/v-g4.min.js",
+  "main": "dist/v-g2.ssr.js",
+  "browser": "dist/v-g2.esm.js",
+  "module": "dist/v-g2.esm.js",
+  "unpkg": "dist/v-g2.min.js",
   "files": [
     "dist/*",
     "src/**/*.vue",
