@@ -1,7 +1,7 @@
 {
   "name_": "@lancelotlewis/v-g2",
   "name": "v-g2",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "keywords": [
     "vue",
     "g2",
@@ -22,7 +22,7 @@
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+    "build:umd": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format umd"
   },
   "dependencies": {
     "@antv/g2": "^4.0.0",

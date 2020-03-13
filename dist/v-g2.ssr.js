@@ -1025,7 +1025,7 @@ var __vue_component__ = normalizeComponent({
   staticRenderFns: __vue_staticRenderFns__
 }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);// Import vue component
 
-var install = function installVG4(Vue) {
+var install = function installVG2(Vue) {
   if (install.installed) return;
   install.installed = true;
   Vue.component('VG2', __vue_component__);

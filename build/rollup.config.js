@@ -109,7 +109,7 @@ if (!argv.format || argv.format === 'cjs') {
       compact: true,
       file: 'dist/v-g2.ssr.js',
       format: 'cjs',
-      name: 'VG4',
+      name: 'VG2',
       exports: 'named',
       globals,
     },
@@ -129,15 +129,15 @@ if (!argv.format || argv.format === 'cjs') {
   buildFormats.push(umdConfig);
 }
 
-if (!argv.format || argv.format === 'iife') {
+if (!argv.format || argv.format === 'umd') {
   const unpkgConfig = {
     ...baseConfig,
     external,
     output: {
       compact: true,
       file: 'dist/v-g2.min.js',
-      format: 'iife',
-      name: 'VG4',
+      format: 'umd',
+      name: 'VG2',
       exports: 'named',
       globals,
     },

@@ -2,7 +2,7 @@
 import component from '@/v-g2.vue';
 
 // install function executed by Vue.use()
-const install = function installVG4(Vue) {
+const install = function installVG2(Vue) {
   if (install.installed) return;
   install.installed = true;
   Vue.component('VG2', component);

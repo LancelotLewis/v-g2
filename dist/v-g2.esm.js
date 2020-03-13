@@ -219,7 +219,7 @@ const __vue_component__ = normalizeComponent({
 
 // Import vue component
 
-const install = function installVG4(Vue) {
+const install = function installVG2(Vue) {
   if (install.installed) return;
   install.installed = true;
   Vue.component('VG2', __vue_component__);
